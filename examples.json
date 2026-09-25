@@ -1,0 +1,104 @@
+[
+  {
+    "label": "70 kg, 170 cm, Mosteller, 100 mg/m²: SC 1,818 → 181,8 mg",
+    "input": {
+      "dose": 100,
+      "peso": 70,
+      "altura": 170,
+      "formula": "m",
+      "teto": "0"
+    },
+    "expected": {
+      "raw": {
+        "bsa": 1.818,
+        "dose": 181.8
+      },
+      "tol": 0.05,
+      "level": "info"
+    },
+    "originalInput": {
+      "dose": 100,
+      "peso": 70,
+      "altura": 170,
+      "formula": "m",
+      "teto": "0"
+    },
+    "expandedZeroOptions": []
+  },
+  {
+    "label": "70 kg, 170 cm, DuBois, 100 mg/m²: SC 1,810 → 181,0 mg",
+    "input": {
+      "dose": 100,
+      "peso": 70,
+      "altura": 170,
+      "formula": "d",
+      "teto": "0"
+    },
+    "expected": {
+      "raw": {
+        "bsa": 1.81,
+        "dose": 181
+      },
+      "tol": 0.1
+    },
+    "originalInput": {
+      "dose": 100,
+      "peso": 70,
+      "altura": 170,
+      "formula": "d",
+      "teto": "0"
+    },
+    "expandedZeroOptions": []
+  },
+  {
+    "label": "120 kg, 180 cm, 75 mg/m², com teto: SC 2,449 limitada a 2,0 → 150 mg",
+    "input": {
+      "dose": 75,
+      "peso": 120,
+      "altura": 180,
+      "formula": "m",
+      "teto": "1"
+    },
+    "expected": {
+      "raw": {
+        "bsa": 2.449,
+        "used": 2,
+        "dose": 150
+      },
+      "level": "mid",
+      "tol": 0.01
+    },
+    "originalInput": {
+      "dose": 75,
+      "peso": 120,
+      "altura": 180,
+      "formula": "m",
+      "teto": "1"
+    },
+    "expandedZeroOptions": []
+  },
+  {
+    "label": "120 kg, 180 cm, 75 mg/m², dose plena: 183,7 mg",
+    "input": {
+      "dose": 75,
+      "peso": 120,
+      "altura": 180,
+      "formula": "m",
+      "teto": "0"
+    },
+    "expected": {
+      "raw": {
+        "dose": 183.71
+      },
+      "level": "info"
+    },
+    "originalInput": {
+      "dose": 75,
+      "peso": 120,
+      "altura": 180,
+      "formula": "m",
+      "teto": "0"
+    },
+    "expandedZeroOptions": []
+  }
+]

@@ -1,0 +1,234 @@
+{
+  "tool": {
+    "id": "dose-por-superficie-corporal",
+    "title": "Dose por superfície corporal (mg/m²)",
+    "short": "Converte a dose em mg/m² na dose total em mg",
+    "desc": "Converte a dose prescrita em mg/m² na dose total em mg, com superfície corporal de Mosteller ou DuBois e opção de limitar a SC em 2,0 m².",
+    "lead": "Calcula a dose total de um quimioterápico ou outro fármaco prescrito por superfície corporal, a partir do peso e da altura.",
+    "spec": [
+      "oncologia-clinica",
+      "hematologia-e-hemoterapia",
+      "pediatria"
+    ],
+    "fields": [
+      [
+        "dose",
+        "Dose prescrita",
+        "num",
+        {
+          "min": 0.01,
+          "max": 10000,
+          "step": 0.01,
+          "unit": "mg/m²",
+          "ph": "75"
+        }
+      ],
+      [
+        "peso",
+        "Peso",
+        "num",
+        {
+          "min": 2,
+          "max": 300,
+          "step": 0.1,
+          "unit": "kg",
+          "ph": "70"
+        }
+      ],
+      [
+        "altura",
+        "Altura",
+        "num",
+        {
+          "min": 45,
+          "max": 230,
+          "step": 1,
+          "unit": "cm",
+          "ph": "170"
+        }
+      ],
+      [
+        "formula",
+        "Fórmula da superfície corporal",
+        "radio",
+        {
+          "opts": {
+            "m": "Mosteller",
+            "d": "DuBois"
+          }
+        }
+      ],
+      [
+        "teto",
+        "Limitar a SC em 2,0 m²?",
+        "radio",
+        {
+          "opts": {
+            "0": "Não (dose plena)",
+            "1": "Sim"
+          }
+        }
+      ]
+    ],
+    "formula": "<p><strong>Dose (mg) = dose prescrita (mg/m²) × superfície corporal (m²)</strong>.</p><ul><li><strong>Mosteller:</strong> SC = √(peso × altura ÷ 3.600)</li><li><strong>DuBois:</strong> SC = 0,007184 × peso<sup>0,425</sup> × altura<sup>0,725</sup></li></ul><p>Com a opção de teto, a SC acima de 2,0 m² é substituída por 2,0 m².</p>",
+    "table": [
+      [
+        "Situação",
+        "Orientação (ASCO 2012)"
+      ],
+      [
+        "Obeso, intenção curativa",
+        "Dose plena pelo peso real"
+      ],
+      [
+        "Toxicidade grave em ciclo anterior",
+        "Reduzir como em qualquer paciente, sem regra especial para obesidade"
+      ],
+      [
+        "Teto de SC em 2,0 m²",
+        "Não usar de rotina; só com justificativa ou quando o protocolo exige"
+      ]
+    ],
+    "tips": [
+      "Use o peso <strong>atual</strong>, medido no dia ou na semana do ciclo; a perda de peso durante o tratamento muda a dose.",
+      "A ASCO recomenda dose plena pelo peso real no obeso: limitar a SC reduz a dose e pode reduzir a chance de cura.",
+      "Teto de dose não é teto de SC: fármacos como vincristina têm dose máxima absoluta própria (em mg), independente da superfície.",
+      "Carboplatina não é dosada por mg/m²: use a fórmula de Calvert. Para a superfície corporal isolada, veja a ferramenta de superfície corporal da cardiologia.",
+      "Arredondar a dose para o frasco é aceitável dentro da tolerância do serviço (em geral até 5 a 10%), mas registre a dose calculada."
+    ],
+    "sources": [
+      [
+        "Mosteller RD. Simplified calculation of body-surface area. N Engl J Med, 1987.",
+        "https://doi.org/10.1056/NEJM198710223171717"
+      ],
+      [
+        "Du Bois D, Du Bois EF. Clinical calorimetry: a formula to estimate the approximate surface area if height and weight be known. Arch Intern Med, 1916.",
+        "https://doi.org/10.1001/archinte.1916.00080130010002"
+      ],
+      [
+        "Griggs JJ et al. Appropriate chemotherapy dosing for obese adult patients with cancer: American Society of Clinical Oncology clinical practice guideline. J Clin Oncol, 2012.",
+        "https://doi.org/10.1200/JCO.2011.39.9436"
+      ]
+    ],
+    "cases": [
+      [
+        "70 kg, 170 cm, Mosteller, 100 mg/m²: SC 1,818 → 181,8 mg",
+        {
+          "dose": 100,
+          "peso": 70,
+          "altura": 170,
+          "formula": "m",
+          "teto": "0"
+        },
+        {
+          "raw": {
+            "bsa": 1.818,
+            "dose": 181.8
+          },
+          "tol": 0.05,
+          "level": "info"
+        }
+      ],
+      [
+        "70 kg, 170 cm, DuBois, 100 mg/m²: SC 1,810 → 181,0 mg",
+        {
+          "dose": 100,
+          "peso": 70,
+          "altura": 170,
+          "formula": "d",
+          "teto": "0"
+        },
+        {
+          "raw": {
+            "bsa": 1.81,
+            "dose": 181
+          },
+          "tol": 0.1
+        }
+      ],
+      [
+        "120 kg, 180 cm, 75 mg/m², com teto: SC 2,449 limitada a 2,0 → 150 mg",
+        {
+          "dose": 75,
+          "peso": 120,
+          "altura": 180,
+          "formula": "m",
+          "teto": "1"
+        },
+        {
+          "raw": {
+            "bsa": 2.449,
+            "used": 2,
+            "dose": 150
+          },
+          "level": "mid",
+          "tol": 0.01
+        }
+      ],
+      [
+        "120 kg, 180 cm, 75 mg/m², dose plena: 183,7 mg",
+        {
+          "dose": 75,
+          "peso": 120,
+          "altura": 180,
+          "formula": "m",
+          "teto": "0"
+        },
+        {
+          "raw": {
+            "dose": 183.71
+          },
+          "level": "info"
+        }
+      ]
+    ],
+    "batch": "onco-diagnostico",
+    "kind": "Calculadora",
+    "config": null,
+    "areaId": "onco-diagnostico",
+    "clinicalReview": "pending",
+    "sourceReview": "pending",
+    "sourceFile": "app/content/ferramentas/onco-diagnostico.php",
+    "arithmeticTest": {
+      "status": "passed",
+      "testedAt": "2026-09-25",
+      "total": 4,
+      "passed": 4,
+      "failures": []
+    },
+    "independentArithmeticTest": {
+      "status": "not-tested",
+      "testedAt": null,
+      "total": 0,
+      "passed": 0,
+      "cases": []
+    }
+  },
+  "review": {
+    "id": "dose-por-superficie-corporal",
+    "status": "restricted",
+    "reason": "O conversor permite teto de superfície corporal 2,0 m² e arredondamentos terapêuticos sem protocolo obrigatório. ASCO 2021 atualiza a referência de 2012 e mantém doses citotóxicas pelo peso real em adultos obesos. Suspender prescrição derivada até contexto farmacológico e revisão.",
+    "sourceUrl": "https://ascopubs.org/doi/abs/10.1200/JCO.21.00471",
+    "sourceTitle": "ASCO — Appropriate Systemic Therapy Dosing for Obese Adult Patients With Cancer",
+    "sourceDate": "2021-05-03",
+    "publisherRegion": "Estados Unidos / ASCO",
+    "checkedAt": "2026-09-25",
+    "clinicalValidation": "not-performed",
+    "suppressLegacyFormula": true,
+    "formulaOverride": "Relação dimensional: dose total (mg) = dose prescrita (mg/m²) × superfície corporal (m²). Este registro não determina prescrição, reduções, tetos ou arredondamento.",
+    "replacementReadings": [
+      {
+        "url": "https://ascopubs.org/doi/abs/10.1200/JCO.21.00471",
+        "title": "ASCO — Appropriate Systemic Therapy Dosing for Obese Adult Patients With Cancer",
+        "date": "2021-05-03",
+        "region": "Estados Unidos / ASCO"
+      }
+    ]
+  },
+  "sourceFile": {
+    "path": "app/content/ferramentas/onco-diagnostico.php",
+    "sha256": "29e7fd6aab1f8bf937a34267255855c21f804696da2b4817d6197578cdcbe743",
+    "bytes": 78570
+  },
+  "clinicalValidation": "not-performed"
+}
