@@ -182,13 +182,9 @@
         }
       ]
     ],
-    "batch": "onco-diagnostico",
     "kind": "Calculadora",
     "config": null,
-    "areaId": "onco-diagnostico",
     "clinicalReview": "pending",
-    "sourceReview": "pending",
-    "sourceFile": "app/content/ferramentas/onco-diagnostico.php",
     "arithmeticTest": {
       "status": "passed",
       "testedAt": "2026-09-25",
@@ -224,11 +220,6 @@
         "region": "Estados Unidos / ASCO"
       }
     ]
-  },
-  "sourceFile": {
-    "path": "app/content/ferramentas/onco-diagnostico.php",
-    "sha256": "29e7fd6aab1f8bf937a34267255855c21f804696da2b4817d6197578cdcbe743",
-    "bytes": 78570
   },
   "clinicalValidation": "not-performed"
 }
