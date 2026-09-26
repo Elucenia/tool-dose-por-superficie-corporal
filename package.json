@@ -1,7 +1,7 @@
 {
   "name": "@elucenia/tool-dose-por-superficie-corporal",
   "version": "0.1.0",
-  "description": "Dose por superfície corporal (mg/m²) · Elucenia: reprodução técnica de fórmula ou escore clínico, sem dependências, para navegador e Node.js.",
+  "description": "Dose por superfície corporal (mg/m²) · ELUCENIA: reprodução técnica de fórmula ou escore clínico, sem dependências, para navegador e Node.js.",
   "keywords": [
     "elucenia",
     "medical-calculator",
